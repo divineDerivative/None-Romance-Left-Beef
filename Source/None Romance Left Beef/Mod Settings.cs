@@ -36,6 +36,8 @@ namespace NoneRomance
 
         public override void DoSettingsWindowContents(Rect canvas)
         {
+            bool noBiotech = false;
+            bool noWBR = false;
             Listing_Standard list = new Listing_Standard
             {
                 ColumnWidth = (canvas.width / 2f) - 17f
@@ -48,11 +50,23 @@ namespace NoneRomance
                 CheckboxLabledTabAndTooltip(list, "NRLB.RomanceMenu".Translate(), ref settings.hideMenu, 25f, "NRLB.RomanceMenuTooltip".Translate());
                 list.GapLine();
             }
+            else
+            {
+                noBiotech = true;
+            }
             if (ModsConfig.IsActive("divineDerivative.Romance") || ModsConfig.IsActive("divineDerivative.RomanceDev"))
             {
                 list.Label("NRLB.HookupHeader".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.HookupButton".Translate(), ref settings.WBRHideButton, 25f, "NRLB.HookupButtonTooltip".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.HookupMenu".Translate(), ref settings.WBRHideMenu, 25f, "NRLB.HookupMenuTooltip".Translate());
+            }
+            else
+            {
+                noWBR = true;
+            }
+            if (noBiotech && noWBR)
+            {
+                list.Label("NRLB.DontHaveRequirements".Translate());
             }
             list.End();
             base.DoSettingsWindowContents(canvas);

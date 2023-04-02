@@ -13,4 +13,6 @@
 	<NRLB.HookupButtonTooltip>Removes the "Hook Up" button from the Social Tab</NRLB.HookupButtonTooltip>
 	<NRLB.HookupMenu>Hide Float Menu Option</NRLB.HookupMenu>
 	<NRLB.HookupMenuTooltip>Removes the "Hook Up" option from the right click menu</NRLB.HookupMenuTooltip>
+
+	<NRLB.DontHaveRequirements>This mod does nothing unless you have either Biotech or Way Better Romance active!</NRLB.DontHaveRequirements>
 </LanguageData>
