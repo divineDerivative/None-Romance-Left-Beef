@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<NRLB.ModTitle>None Romance Left Beef</NRLB.ModTitle>
+
+	<NRLB.RomanceHeader>Ordered Romance Attempts</NRLB.RomanceHeader>
+	<NRLB.RomanceButton>Hide Romance Button</NRLB.RomanceButton>
+	<NRLB.RomanceButtonTooltip>Removes the "Romance" button from the Social Tab</NRLB.RomanceButtonTooltip>
+	<NRLB.RomanceMenu>Hide Float Menu Option</NRLB.RomanceMenu>
+	<NRLB.RomanceMenuTooltip>Removes the "Romance" option from the right click menu</NRLB.RomanceMenuTooltip>
+
+	<NRLB.HookupHeader>Ordered Hook Up</NRLB.HookupHeader>
+	<NRLB.HookupButton>Hide Hook Up Button</NRLB.HookupButton>
+	<NRLB.HookupButtonTooltip>Removes the "Hook Up" button from the Social Tab</NRLB.HookupButtonTooltip>
+	<NRLB.HookupMenu>Hide Float Menu Option</NRLB.HookupMenu>
+	<NRLB.HookupMenuTooltip>Removes the "Hook Up" option from the right click menu</NRLB.HookupMenuTooltip>
+</LanguageData>
