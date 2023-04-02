@@ -3,6 +3,7 @@
 	<name>None Romance Left Beef</name>
 	<author>divineDerivative</author>
 	<packageId>divineDerivative.NoneRomance</packageId>
+	<url>https://github.com/divineDerivative/None-Romance-Left-Beef</url>
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
@@ -16,8 +17,9 @@
 	</modDependencies>
 	<loadAfter>
 		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld.Biotech</li>
 		<li>divineDerivative.Romance</li>
 		<li>divineDerivative.RomanceDev</li>
 	</loadAfter>
-	<description>Remove the romance button from the social tab and remove forced romance attempts from the right click menu. Does the same for ordered hookups if you have Way Better Romance. Mod options allow you to toggle disabling the buttons and menu options separately, so you can re-enable them if you</description>
+	<description>Remove the romance button from the social tab and remove forced romance attempts from the right click menu. Does the same for ordered hookups if you have Way Better Romance.\n\nMod options allow you to toggle disabling the buttons and menu options separately, so you can re-enable them all if you feel the need to order your colonists around again.\n\nSteam doesn't support either/or requirements, but this mod will do nothing without either Biotech or Way Better Romance active.</description>
 </ModMetaData>
