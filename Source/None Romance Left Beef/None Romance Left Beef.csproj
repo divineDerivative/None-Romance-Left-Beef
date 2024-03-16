@@ -14,31 +14,35 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '1.4|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\Assemblies\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <OutputPath>..\..\1.4\Assemblies\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;v1_4</DefineConstants>
+    <DebugType>portable</DebugType>
     <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '1.5|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\1.5\Assemblies\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;v1_5</DefineConstants>
+    <DebugType>portable</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\..\..\..\..\..\workshop\content\294100\2009463077\Current\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp">
+    <Reference Include="Assembly-CSharp" Condition="'$(Configuration)|$(Platform)' == '1.5|AnyCPU'">
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RimWorld14" Condition="'$(Configuration)|$(Platform)' == '1.4|AnyCPU'">
+      <HintPath>..\..\..\..\..\..\..\..\..\Users\jocme\OneDrive\Desktop\RimWorld14.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,8 +57,12 @@
       <HintPath>..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WayBetterRomance">
+    <Reference Include="WayBetterRomance" Condition="'$(Configuration)|$(Platform)' == '1.5|AnyCPU'">
       <HintPath>..\..\..\WayBetterRomance\1.5\Assemblies\WayBetterRomance.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WayBetterRomance" Condition="'$(Configuration)|$(Platform)' == '1.4|AnyCPU'">
+      <HintPath>..\..\..\WayBetterRomance\1.4\Assemblies\WayBetterRomance.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

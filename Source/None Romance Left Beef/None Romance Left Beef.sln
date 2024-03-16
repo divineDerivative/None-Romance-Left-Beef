@@ -7,10 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "None Romance Left Beef", "N
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		1.4|Any CPU = 1.4|Any CPU
+		1.5|Any CPU = 1.5|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.1.4|Any CPU.ActiveCfg = 1.4|Any CPU
+		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.1.4|Any CPU.Build.0 = 1.4|Any CPU
+		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.1.5|Any CPU.ActiveCfg = 1.5|Any CPU
+		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.1.5|Any CPU.Build.0 = 1.5|Any CPU
 		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54CAA3F2-1708-4079-BD7B-431041B29B9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
