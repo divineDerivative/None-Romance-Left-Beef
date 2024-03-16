@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using BetterRomance;
 using BetterRomance.HarmonyPatches;
-using UnityEngine;
 
 namespace NoneRomance
 {
@@ -82,8 +81,8 @@ namespace NoneRomance
 
         public static void PatchWBR(this Harmony harmony)
         {
-            harmony.Patch(AccessTools.Method(typeof(HookupUtility), nameof(HookupUtility.CanDrawTryHookup)), postfix: new HarmonyMethod(typeof(WBRPatches), nameof(WBRPatches.CanDrawTryHookupPostfix)));
-            harmony.Patch(AccessTools.Method(typeof(FloatMenuMakerMap_AddHumanlikeOrders), nameof(FloatMenuMakerMap_AddHumanlikeOrders.Postfix)), prefix: new HarmonyMethod(typeof(WBRPatches), nameof(WBRPatches.AddHumanlikeOrdersPrefix)));
+            harmony.Patch(AccessTools.Method(typeof(HookupUtility), nameof(HookupUtility.CanDrawTryHookup)), postfix: new HarmonyMethod(typeof(WBRPatches), nameof(CanDrawTryHookupPostfix)));
+            harmony.Patch(AccessTools.Method(typeof(FloatMenuMakerMap_AddHumanlikeOrders), nameof(FloatMenuMakerMap_AddHumanlikeOrders.Postfix)), prefix: new HarmonyMethod(typeof(WBRPatches), nameof(AddHumanlikeOrdersPrefix)));
         }
     }
 }

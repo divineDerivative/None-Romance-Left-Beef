@@ -54,7 +54,7 @@ namespace NoneRomance
             {
                 noBiotech = true;
             }
-            if (ModsConfig.IsActive("divineDerivative.Romance") || ModsConfig.IsActive("divineDerivative.RomanceDev"))
+            if (ModsConfig.IsActive("divineDerivative.Romance"))
             {
                 list.Label("NRLB.HookupHeader".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.HookupButton".Translate(), ref settings.WBRHideButton, 25f, "NRLB.HookupButtonTooltip".Translate());

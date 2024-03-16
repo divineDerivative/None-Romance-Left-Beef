@@ -54,7 +54,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WayBetterRomance">
-      <HintPath>..\..\..\Way Better Romance\Assemblies\WayBetterRomance.dll</HintPath>
+      <HintPath>..\..\..\WayBetterRomance\1.5\Assemblies\WayBetterRomance.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
