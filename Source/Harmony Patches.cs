@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using RimWorld;
-using Verse;
+﻿using BetterRomance;
+using BetterRomance.HarmonyPatches;
 using HarmonyLib;
+using RimWorld;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using BetterRomance;
-using BetterRomance.HarmonyPatches;
+using Verse;
 
 namespace NoneRomance
 {
@@ -14,11 +14,16 @@ namespace NoneRomance
     {
         static OnStartup()
         {
-            Harmony harmony = new Harmony(id: "rimworld.divineDerivative.NoneRomance");
+            Harmony harmony = new(id: "rimworld.divineDerivative.NoneRomance");
             harmony.PatchAll();
-            if (ModsConfig.IsActive("divineDerivative.Romance") || ModsConfig.IsActive("divineDerivative.RomanceDev"))
+            if (ModsConfig.IsActive("divineDerivative.Romance"))
             {
+                NoneRomanceMod.settings.WBRActive = true;
                 harmony.PatchWBR();
+            }
+            if (ModsConfig.BiotechActive)
+            {
+                NoneRomanceMod.settings.BiotechActive = true;
             }
         }
     }
@@ -28,7 +33,7 @@ namespace NoneRomance
     {
         [HarmonyPostfix]
         [HarmonyPatch(typeof(SocialCardUtility), "CanDrawTryRomance")]
-        public static void CanDrawTryRomancePostfix(Pawn pawn, ref bool __result)
+        public static void CanDrawTryRomancePostfix(ref bool __result)
         {
             if (__result && NoneRomanceMod.settings.hideButton)
             {
@@ -43,15 +48,15 @@ namespace NoneRomance
             MethodInfo Drafted = AccessTools.PropertyGetter(typeof(Pawn), nameof(Pawn.Drafted));
             MethodInfo BiotechActive = AccessTools.PropertyGetter(typeof(ModsConfig), nameof(ModsConfig.BiotechActive));
 
-            object jumpLabel = new object();
+            Label jumpLabel = new();
             bool labelFound = false;
-            List<CodeInstruction> codes = new List<CodeInstruction>(instructions);
+            List<CodeInstruction> codes = new(instructions);
             for (int i = 0; i < codes.Count; i++)
             {
                 yield return codes[i];
                 if (codes[i].Calls(Drafted) && codes[i + 1].opcode == OpCodes.Brtrue && codes[i + 2].Calls(BiotechActive))
                 {
-                    jumpLabel = codes[i + 1].operand;
+                    jumpLabel = (Label)codes[i + 1].operand;
                     labelFound = true;
                 }
                 if (labelFound && codes[i].opcode == OpCodes.Brfalse && codes[i - 1].Calls(BiotechActive))
@@ -66,7 +71,7 @@ namespace NoneRomance
 
     public static class WBRPatches
     {
-        public static void CanDrawTryHookupPostfix(Pawn pawn, ref bool __result)
+        public static void CanDrawTryHookupPostfix(ref bool __result)
         {
             if (__result && NoneRomanceMod.settings.WBRHideButton)
             {

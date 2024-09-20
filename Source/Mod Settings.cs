@@ -1,5 +1,5 @@
-﻿using Verse;
-using UnityEngine;
+﻿using UnityEngine;
+using Verse;
 
 namespace NoneRomance
 {
@@ -9,6 +9,8 @@ namespace NoneRomance
         public bool hideMenu = true;
         public bool WBRHideButton = true;
         public bool WBRHideMenu = true;
+        internal bool BiotechActive;
+        internal bool WBRActive;
 
         public override void ExposeData()
         {
@@ -36,40 +38,31 @@ namespace NoneRomance
 
         public override void DoSettingsWindowContents(Rect canvas)
         {
-            bool noBiotech = false;
-            bool noWBR = false;
-            Listing_Standard list = new Listing_Standard
+            Listing_Standard list = new()
             {
                 ColumnWidth = (canvas.width / 2f) - 17f
             };
             list.Begin(canvas);
-            if (ModsConfig.BiotechActive)
+            if (settings.BiotechActive)
             {
                 list.Label("NRLB.RomanceHeader".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.RomanceButton".Translate(), ref settings.hideButton, 25f, "NRLB.RomanceButtonTooltip".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.RomanceMenu".Translate(), ref settings.hideMenu, 25f, "NRLB.RomanceMenuTooltip".Translate());
                 list.GapLine();
             }
-            else
-            {
-                noBiotech = true;
-            }
-            if (ModsConfig.IsActive("divineDerivative.Romance"))
+
+            if (settings.WBRActive)
             {
                 list.Label("NRLB.HookupHeader".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.HookupButton".Translate(), ref settings.WBRHideButton, 25f, "NRLB.HookupButtonTooltip".Translate());
                 CheckboxLabledTabAndTooltip(list, "NRLB.HookupMenu".Translate(), ref settings.WBRHideMenu, 25f, "NRLB.HookupMenuTooltip".Translate());
             }
-            else
-            {
-                noWBR = true;
-            }
-            if (noBiotech && noWBR)
+
+            if (!settings.BiotechActive && !settings.WBRActive)
             {
                 list.Label("NRLB.DontHaveRequirements".Translate());
             }
             list.End();
-            base.DoSettingsWindowContents(canvas);
         }
 
         private void CheckboxLabledTabAndTooltip(Listing_Standard list, string label, ref bool checkOn, float tabIn, string tooltip)
