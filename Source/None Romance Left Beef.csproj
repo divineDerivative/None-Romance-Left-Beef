@@ -71,5 +71,17 @@
     <Compile Include="Mod Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0DivineFramework">
+      <HintPath>..\..\DivineFramework\Assemblies\0DivineFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>call "$(SolutionDir)..\DivineFramework\PostBuild.bat" "$(ProjectName)"</PostBuildEvent>
+  </PropertyGroup>
+  <Target Name="ForcePostBuild" AfterTargets="Build">
+    <Touch Files="$(IntermediateOutputPath)TouchMe.txt" />
+  </Target>
 </Project>

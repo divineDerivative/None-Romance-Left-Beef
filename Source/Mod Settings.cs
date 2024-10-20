@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DivineFramework;
+using UnityEngine;
 using Verse;
 
 namespace NoneRomance
@@ -11,6 +12,7 @@ namespace NoneRomance
         public bool WBRHideMenu = true;
         internal bool BiotechActive;
         internal bool WBRActive;
+        internal SettingsHandler<Settings> handler = new();
 
         public override void ExposeData()
         {
@@ -18,7 +20,50 @@ namespace NoneRomance
             Scribe_Values.Look(ref hideMenu, "hideRomanceMenuOption", true);
             Scribe_Values.Look(ref WBRHideButton, "WBRHideButton", true);
             Scribe_Values.Look(ref WBRHideMenu, "WBRHideMenu", true);
-            base.ExposeData();
+        }
+
+        internal void SetUpHandler()
+        {
+            if (BiotechActive)
+            {
+                handler.RegisterNewRow("RomanceHeader").AddLabel("NRLB.RomanceHeader".Translate);
+
+                UIContainer romanceButtonRow = handler.RegisterNewRow("RomanceButton");
+                romanceButtonRow.AddSpace(relative: 0.05f);
+                romanceButtonRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                    .WithLabel("NRLB.RomanceButton".Translate)
+                    .WithTooltip("NRLB.RomanceButtonTooltip".Translate)
+                    .WithReference(this, nameof(hideButton), hideButton));
+
+                UIContainer romanceMenuRow = handler.RegisterNewRow("RomanceMenu");
+                romanceMenuRow.AddSpace(relative: 0.05f);
+                romanceMenuRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                    .WithLabel("NRLB.RomanceMenu".Translate)
+                    .WithTooltip("NRLB.RomanceMenuTooltip".Translate)
+                    .WithReference(this, nameof(hideMenu), hideMenu));
+            }
+            handler.RegisterNewRow("Gap").AddLine(relative: 0.58f).HideWhen(() => !BiotechActive || !WBRActive);
+
+            if (WBRActive)
+            {
+                handler.RegisterNewRow("HookupHeader").AddLabel("NRLB.HookupHeader".Translate);
+
+                UIContainer hookupButtonRow = handler.RegisterNewRow("HookupButton");
+                hookupButtonRow.AddSpace(relative: 0.05f);
+                hookupButtonRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                    .WithLabel("NRLB.HookupButton".Translate)
+                    .WithTooltip("NRLB.HookupButtonTooltip".Translate)
+                    .WithReference(this, nameof(WBRHideButton), WBRHideButton));
+
+                UIContainer hookupMenuRow = handler.RegisterNewRow("HookupMenu");
+                hookupMenuRow.AddSpace(relative: 0.05f);
+                hookupMenuRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                    .WithLabel("NRLB.HookupMenu".Translate)
+                    .WithTooltip("NRLB.HookupMenuTooltip".Translate)
+                    .WithReference(this, nameof(WBRHideMenu), WBRHideMenu));
+            }
+
+            handler.Initialize();
         }
     }
 
@@ -29,6 +74,7 @@ namespace NoneRomance
         public NoneRomanceMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<Settings>();
+            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new("0.2.0.3"), "[NoneRomance]", () => true);
         }
 
         public override string SettingsCategory()
@@ -43,46 +89,23 @@ namespace NoneRomance
                 ColumnWidth = (canvas.width / 2f) - 17f
             };
             list.Begin(canvas);
-            if (settings.BiotechActive)
-            {
-                list.Label("NRLB.RomanceHeader".Translate());
-                CheckboxLabledTabAndTooltip(list, "NRLB.RomanceButton".Translate(), ref settings.hideButton, 25f, "NRLB.RomanceButtonTooltip".Translate());
-                CheckboxLabledTabAndTooltip(list, "NRLB.RomanceMenu".Translate(), ref settings.hideMenu, 25f, "NRLB.RomanceMenuTooltip".Translate());
-                list.GapLine();
-            }
-
-            if (settings.WBRActive)
-            {
-                list.Label("NRLB.HookupHeader".Translate());
-                CheckboxLabledTabAndTooltip(list, "NRLB.HookupButton".Translate(), ref settings.WBRHideButton, 25f, "NRLB.HookupButtonTooltip".Translate());
-                CheckboxLabledTabAndTooltip(list, "NRLB.HookupMenu".Translate(), ref settings.WBRHideMenu, 25f, "NRLB.HookupMenuTooltip".Translate());
-            }
 
             if (!settings.BiotechActive && !settings.WBRActive)
             {
                 list.Label("NRLB.DontHaveRequirements".Translate());
+                list.End();
+                return;
             }
-            list.End();
-        }
 
-        private void CheckboxLabledTabAndTooltip(Listing_Standard list, string label, ref bool checkOn, float tabIn, string tooltip)
-        {
-            float height = Text.CalcHeight(label, list.ColumnWidth);
-            Rect rect = list.GetRect(height);
-            rect.xMin += tabIn;
-            if (!list.BoundingRectCached.HasValue || rect.Overlaps(list.BoundingRectCached.Value))
+            if (!settings.handler.Initialized)
             {
-                if (!tooltip.NullOrEmpty())
-                {
-                    if (Mouse.IsOver(rect))
-                    {
-                        Widgets.DrawHighlight(rect);
-                    }
-                    TooltipHandler.TipRegion(rect, tooltip);
-                }
-                Widgets.CheckboxLabeled(rect, label, ref checkOn);
+                settings.handler.width = list.ColumnWidth;
+                settings.SetUpHandler();
             }
-            list.Gap(list.verticalSpacing);
+
+            settings.handler.Draw(list);
+
+            list.End();
         }
     }
 }
