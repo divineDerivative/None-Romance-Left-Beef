@@ -1,4 +1,5 @@
 ﻿using DivineFramework;
+using DivineFramework.UI;
 using UnityEngine;
 using Verse;
 
@@ -74,7 +75,7 @@ namespace NoneRomance
         public NoneRomanceMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<Settings>();
-            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new("0.2.1.0"), "[NoneRomance]", () => true);
+            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new("0.3.0.0"), "[NoneRomance]", () => true);
         }
 
         public override string SettingsCategory()
