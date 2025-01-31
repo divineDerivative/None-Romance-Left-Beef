@@ -29,16 +29,16 @@ namespace NoneRomance
             {
                 handler.RegisterNewRow("RomanceHeader").AddLabel("NRLB.RomanceHeader".Translate);
 
-                UIContainer romanceButtonRow = handler.RegisterNewRow("RomanceButton");
+                UIRow romanceButtonRow = handler.RegisterNewRow("RomanceButton");
                 romanceButtonRow.AddSpace(relative: 0.05f);
-                romanceButtonRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                romanceButtonRow.Add(NewElement.Checkbox(relative: 0.5f)
                     .WithLabel("NRLB.RomanceButton".Translate)
                     .WithTooltip("NRLB.RomanceButtonTooltip".Translate)
                     .WithReference(this, nameof(hideButton), hideButton));
 
-                UIContainer romanceMenuRow = handler.RegisterNewRow("RomanceMenu");
+                UIRow romanceMenuRow = handler.RegisterNewRow("RomanceMenu");
                 romanceMenuRow.AddSpace(relative: 0.05f);
-                romanceMenuRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                romanceMenuRow.Add(NewElement.Checkbox(relative: 0.5f)
                     .WithLabel("NRLB.RomanceMenu".Translate)
                     .WithTooltip("NRLB.RomanceMenuTooltip".Translate)
                     .WithReference(this, nameof(hideMenu), hideMenu));
@@ -49,16 +49,16 @@ namespace NoneRomance
             {
                 handler.RegisterNewRow("HookupHeader").AddLabel("NRLB.HookupHeader".Translate);
 
-                UIContainer hookupButtonRow = handler.RegisterNewRow("HookupButton");
+                UIRow hookupButtonRow = handler.RegisterNewRow("HookupButton");
                 hookupButtonRow.AddSpace(relative: 0.05f);
-                hookupButtonRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                hookupButtonRow.Add(NewElement.Checkbox(relative: 0.5f)
                     .WithLabel("NRLB.HookupButton".Translate)
                     .WithTooltip("NRLB.HookupButtonTooltip".Translate)
                     .WithReference(this, nameof(WBRHideButton), WBRHideButton));
 
-                UIContainer hookupMenuRow = handler.RegisterNewRow("HookupMenu");
+                UIRow hookupMenuRow = handler.RegisterNewRow("HookupMenu");
                 hookupMenuRow.AddSpace(relative: 0.05f);
-                hookupMenuRow.AddElement(NewElement.Checkbox(relative: 0.5f)
+                hookupMenuRow.Add(NewElement.Checkbox(relative: 0.5f)
                     .WithLabel("NRLB.HookupMenu".Translate)
                     .WithTooltip("NRLB.HookupMenuTooltip".Translate)
                     .WithReference(this, nameof(WBRHideMenu), WBRHideMenu));
@@ -75,7 +75,7 @@ namespace NoneRomance
         public NoneRomanceMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<Settings>();
-            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new("0.3.0.0"), "[NoneRomance]", () => true);
+            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new("0.8.1.0"), "[NoneRomance]", () => true);
         }
 
         public override string SettingsCategory()
