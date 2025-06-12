@@ -41,6 +41,17 @@ namespace NoneRomance
             }
         }
 
+#if v1_6
+        [HarmonyPostfix]
+        [HarmonyPatch(typeof(FloatMenuOptionProvider_Romance), "AppliesInt")]
+        public static void Postfix(ref bool __result)
+        {
+            if (__result && NoneRomanceMod.settings.hideMenu)
+            {
+                __result = false;
+            }
+        }
+#else
         [HarmonyTranspiler]
         [HarmonyPatch(typeof(FloatMenuMakerMap), "AddHumanlikeOrders")]
         public static IEnumerable<CodeInstruction> AddHumanlikeOrdersTranspiler(IEnumerable<CodeInstruction> instructions)
@@ -67,6 +78,7 @@ namespace NoneRomance
                 }
             }
         }
+#endif
     }
 
     public static class WBRPatches
