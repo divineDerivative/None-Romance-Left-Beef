@@ -103,6 +103,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
+    <PreBuildEvent>call "$(SolutionDir)..\DivineFramework\PreBuild.bat" "$(ProjectDir)" "$(RootNamespace)"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
     <PostBuildEvent>call "$(SolutionDir)..\DivineFramework\PostBuild.bat" "$(ProjectName)"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="ForcePostBuild" AfterTargets="Build">
