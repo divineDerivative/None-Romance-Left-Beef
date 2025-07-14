@@ -99,7 +99,11 @@ namespace NoneRomance
         public static void PatchWBR(this Harmony harmony)
         {
             harmony.Patch(AccessTools.Method(typeof(HookupUtility), nameof(HookupUtility.CanDrawTryHookup)), postfix: new HarmonyMethod(typeof(WBRPatches), nameof(CanDrawTryHookupPostfix)));
+#if !v1_6
             harmony.Patch(AccessTools.Method(typeof(FloatMenuMakerMap_AddHumanlikeOrders), nameof(FloatMenuMakerMap_AddHumanlikeOrders.Postfix)), prefix: new HarmonyMethod(typeof(WBRPatches), nameof(AddHumanlikeOrdersPrefix)));
+#else
+            harmony.Patch(AccessTools.Method(typeof(FloatMenuOptionProvider_Hookup), nameof(FloatMenuOptionProvider_Hookup.Applies)), prefix: new HarmonyMethod(typeof(WBRPatches), nameof(AddHumanlikeOrdersPrefix)));
+#endif
         }
     }
 }
