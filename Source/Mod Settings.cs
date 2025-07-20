@@ -75,7 +75,7 @@ namespace NoneRomance
         public NoneRomanceMod(ModContentPack content) : base(content)
         {
             settings = GetSettings<Settings>();
-            ModManagement.RegisterMod("NRLB.ModTitle", typeof(NoneRomanceMod).Assembly.GetName().Name, new(FrameworkVersionInfo.Version), "[NoneRomance]", () => true);
+            ModManagement. RegisterMod("NRLB.ModTitle", new(FrameworkVersionInfo.Version));
         }
 
         public override string SettingsCategory()
